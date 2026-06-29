@@ -9,6 +9,7 @@ import StaffLogin from "./pages/StaffLogin";
 import Dashboard from "./pages/Dashboard";
 import Billing from "./pages/Billing";
 import Sales from "./components/Sales"
+import AdminOrders from "./pages/AdminOrders"
 
 //Inventory
 import InventoryForm from "./Inventory/InventoryForm"
@@ -148,7 +149,15 @@ createRoot(document.getElementById("root")).render(
                 </ProtectedRoute>
               }
             />
-
+            
+             <Route
+              path="/adminorders"
+              element={
+                <ProtectedRoute>
+                  <AdminOrders />
+                </ProtectedRoute>
+              }
+            />
 
             {/* ================= MANAGER ================= */}
 

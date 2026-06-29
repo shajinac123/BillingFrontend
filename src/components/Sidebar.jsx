@@ -95,6 +95,11 @@ export default function Sidebar() {
       icon: BarChart3,
       path: "/inventory",
     },
+     {
+      name: "Orders",
+      icon: BarChart3,
+      path: "/adminorders",
+    },
   ];
 
   return (

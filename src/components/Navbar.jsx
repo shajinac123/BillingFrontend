@@ -1,57 +1,106 @@
-import { Bell, Moon, Search, User } from "lucide-react";
+import {
+  Search,
+  Bell,
+  User,
+  LogOut,
+  CalendarDays,
+  DollarSign,
+} from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+  const navigate = useNavigate();
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("staff");
+    navigate("/");
+  };
+
   return (
-    <header className="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
+    <header className="bg-white shadow border-b sticky top-0 z-50">
       <div className="flex items-center justify-between h-16 px-6">
 
-        {/* Search */}
-        <div className="relative w-96 hidden md:block">
-          <Search
-            size={18}
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
-          />
+        {/* Left */}
+        <div className="flex items-center gap-6">
 
-          <input
-            type="text"
-            placeholder="Search..."
-            className="w-full rounded-xl bg-slate-100 py-2.5 pl-11 pr-4 outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
+          <div>
+            <h1 className="text-2xl font-bold text-orange-600">
+              🍽️ Spice Garden
+            </h1>
+            <p className="text-xs text-gray-500">
+              Restaurant Billing System
+            </p>
+          </div>
 
-        {/* Right Side */}
-        <div className="flex items-center gap-4">
+          <div className="hidden lg:flex relative">
+            <Search
+              size={18}
+              className="absolute left-3 top-3 text-gray-400"
+            />
 
-          {/* Dark Mode */}
-          <button className="w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition">
-            <Moon size={18} />
-          </button>
-
-          {/* Notifications */}
-          <button className="relative w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition">
-            <Bell size={18} />
-
-            <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-red-500"></span>
-          </button>
-
-          {/* Profile */}
-          <div className="flex items-center gap-3 cursor-pointer rounded-xl px-3 py-2 hover:bg-slate-100 transition">
-            <div className="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center">
-              <User size={18} />
-            </div>
-
-            <div className="hidden md:block">
-              <h4 className="font-semibold text-slate-700">
-                Admin
-              </h4>
-
-              <p className="text-xs text-slate-500">
-                Administrator
-              </p>
-            </div>
+            <input
+              type="text"
+              placeholder="Search menu, bill, customer..."
+              className="w-80 border rounded-lg pl-10 pr-4 py-2 focus:ring-2 focus:ring-orange-500 outline-none"
+            />
           </div>
 
         </div>
+
+        {/* Right */}
+        <div className="flex items-center gap-5">
+
+          {/* Date */}
+          <div className="hidden md:flex items-center gap-2 text-gray-600">
+            <CalendarDays size={18} />
+            <span>{new Date().toLocaleDateString()}</span>
+          </div>
+
+          {/* Today's Sales */}
+          <div className="hidden lg:flex items-center gap-2 bg-green-100 text-green-700 px-4 py-2 rounded-lg">
+            <DollarSign size={18} />
+            <span className="font-semibold">
+              ₹12,500
+            </span>
+          </div>
+
+          {/* Notification */}
+          <button className="relative p-2 rounded-lg hover:bg-gray-100">
+            <Bell size={22} />
+
+            <span className="absolute top-1 right-1 bg-red-500 w-2 h-2 rounded-full"></span>
+          </button>
+
+          {/* Profile */}
+          <div className="flex items-center gap-3">
+
+            <div className="w-10 h-10 rounded-full bg-orange-500 text-white flex items-center justify-center">
+              <User size={20} />
+            </div>
+
+            <div className="hidden md:block">
+              <h3 className="font-semibold">
+                Admin
+              </h3>
+              <p className="text-xs text-gray-500">
+                Restaurant Manager
+              </p>
+            </div>
+
+          </div>
+
+          {/* Logout */}
+          <button
+            onClick={logout}
+            className="flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg"
+          >
+            <LogOut size={18} />
+            Logout
+          </button>
+
+        </div>
+
       </div>
     </header>
   );
